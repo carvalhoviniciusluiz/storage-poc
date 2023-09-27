@@ -1,15 +1,22 @@
-import { type BlobDownloadResponseParsed, BlobUploadCommonResponse, BlockBlobClient } from "@azure/storage-blob";
-import { GetStorage, SetStorage } from "~/application/protocols/cache";
+import { AzureStorage } from "~/infra/protocols/cache";
 
-export class AzureStorageAdapter
-  implements SetStorage<BlobUploadCommonResponse>, GetStorage<BlobDownloadResponseParsed> {
-  constructor(private readonly storage: BlockBlobClient) {}
+export interface AzureStorageClient {
+  uploadFile(filePath: string): Promise<any>
+  downloadToFile(fileName: string): Promise<any>
+}
 
-  async set(filePath: string) {
-    return this.storage.uploadFile(filePath);
+export class AzureStorageAdapter implements AzureStorage {
+  constructor(private readonly storage: AzureStorageClient) {}
+
+  async set(file: any) {
+    console.log('AzureStorageAdapter#set', { file })
+
+    return this.storage.uploadFile(file.path);
   }
 
   async get(fileName: string) {
+    console.log('AzureStorageAdapter#get', { fileName })
+
     return this.storage.downloadToFile(fileName);
   }
 }

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npx tsc",
-    "dev": "ts-node -r tsconfig-paths/register src/presentation/http/server.ts",
+    "dev": "node --loader ts-node/esm -r tsconfig-paths/register --inspect src/presentation/http/server.ts",
     "test": "jest"
   },
   "keywords": [],

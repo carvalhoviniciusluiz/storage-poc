@@ -3,5 +3,4 @@ coverage
 dist
 uploads
 *.js
-*.http
 *.sqlite

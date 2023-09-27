@@ -9,7 +9,8 @@ export class MainController {
       body: any,
       file: any
     ) => {
-      console.log(file);
+      const output = await usecaseFactory.createUploadFile().execute(file);
+      return output;
     });
   }
 }

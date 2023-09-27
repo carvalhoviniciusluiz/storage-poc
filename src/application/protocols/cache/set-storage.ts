@@ -1,3 +1,3 @@
 export interface SetStorage<T = any> {
-  set: (key: string, value: any) => Promise<T>
+  set: (key: any, value?: any) => Promise<T>
 }
