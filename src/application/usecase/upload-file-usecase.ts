@@ -4,7 +4,10 @@ import { AzureStorage } from "~/infra/protocols/cache";
 export class UploadFileUseCase implements UploadFile {
   constructor(private readonly storage: AzureStorage) {}
 
-  async execute(input: UploadFile.Input): Promise<void> {
-    await this.storage.set(input);
+  async execute(input: UploadFile.Input): Promise<UploadFile.Output> {
+    const output = await this.storage.set(input);
+    return {
+      clientRequestId: output.clientRequestId
+    };
   }
 }

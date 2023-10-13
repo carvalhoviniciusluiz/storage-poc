@@ -15,5 +15,5 @@ export namespace UploadFile {
       size: number;
     }
   }
-  export type Output = void
+  export type Output = any
 }

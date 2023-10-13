@@ -20,7 +20,12 @@ export class ExpressAdapter implements HttpServer {
       res: Response
     ) => {
       try {
-        const output = await callback(req.params, req.body, req.file);
+        const output = await callback({
+          query: req.query,
+          params: req.params,
+          body: req.body,
+          file: req.file
+        });
         res.json(output);
       } catch (e: any) {
         res.status(422).send(e.message);
